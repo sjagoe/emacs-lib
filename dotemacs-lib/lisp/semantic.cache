@@ -1,0 +1,16 @@
+;; Object lisp/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "lisp/"
+  :tables (list 
+   (semanticdb-table "sourcepair.el"
+    :major-mode 'emacs-lisp-mode
+    :tags '(("sourcepair-source-extensions" variable (:user-visible-flag t :default-value (quote (".cpp" ".cxx" ".cc" ".C" ".c"))) nil [4083 4625]) ("sourcepair-header-extensions" variable (:user-visible-flag t :default-value (quote (".h" ".hpp" ".hh"))) nil [4627 5129]) ("sourcepair-source-path" variable (:user-visible-flag t :default-value (quote ("."))) nil [5131 5812]) ("sourcepair-header-path" variable (:user-visible-flag t :default-value (quote ("."))) nil [5814 6089]) ("sourcepair-recurse-ignore" variable (:user-visible-flag t :default-value (quote ("CVS"))) nil [6091 6492]) ("sourcepair-header-file-p" function (:arguments ("filename")) nil [6494 6980]) ("sourcepair-source-file-p" function (:arguments ("filename")) nil [6983 7467]) ("sourcepair-load" function (:user-visible-flag t) nil [7470 11204]) ("sourcepair-yank-advice" function nil nil [11207 12659]))
+    :file "sourcepair.el"
+    :pointmax 12690
+    :unmatched-syntax 'nil
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0pre4"
+  :semanticdb-version "2.0pre4"
+  )

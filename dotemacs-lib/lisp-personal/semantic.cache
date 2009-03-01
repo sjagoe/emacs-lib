@@ -1,0 +1,34 @@
+;; Object lisp-personal/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "lisp-personal/"
+  :tables (list 
+   (semanticdb-table "sj-ecb.el"
+    :major-mode 'emacs-lisp-mode
+    :tags '(("setq" code nil nil [15 56]) ("load-file" code nil nil [57 116]) ("global-semantic-show-unmatched-syntax-mode" code nil nil [1064 1111]) ("semantic-load" include nil nil [1112 1136]) ("eieio" include nil nil [1137 1153]) ("speedbar" include nil nil [1154 1173]) ("ecb" include nil nil [1175 1189]) ("add-to-list" code nil nil [1191 1225]) ("add-to-list" code nil nil [1226 1265]) ("add-to-list" code nil nil [1266 1309]) ("sj-ecb" package nil nil [1311 1328]))
+    :file "sj-ecb.el"
+    :pointmax 1329
+    :unmatched-syntax 'nil
+    )
+   (semanticdb-table "sj-keys.el"
+    :major-mode 'emacs-lisp-mode
+    :tags '(("global-set-key" code nil nil [147 191]) ("global-set-key" code nil nil [192 232]) ("global-set-key" code nil nil [233 281]) ("global-set-key" code nil nil [282 327]) ("global-set-key" code nil nil [328 369]) ("global-set-key" code nil nil [370 416]) ("global-set-key" code nil nil [417 468]) ("global-set-key" code nil nil [469 519]) ("global-set-key" code nil nil [520 563]) ("global-set-key" code nil nil [564 612]) ("sj-keys" package nil nil [614 632]))
+    :file "sj-keys.el"
+    :pointmax 632
+    )
+   (semanticdb-table "sj-misc-custom.el"
+    :major-mode 'emacs-lisp-mode
+    :tags '(("ido-mode" code nil nil [18 28]) ("setq" code nil nil [46 67]) ("setq" code nil nil [97 122]) ("setq" code nil nil [123 150]) ("setq" code nil nil [152 179]) ("setq" code nil nil [181 211]) ("add-to-list" code nil nil [283 331]) ("add-to-list" code nil nil [332 381]) ("add-to-list" code nil nil [382 498]) ("sj-misc-custom" package nil nil [543 568]))
+    :file "sj-misc-custom.el"
+    :pointmax 568
+    )
+   (semanticdb-table "sj-cpp.el"
+    :major-mode 'emacs-lisp-mode
+    :tags '(("setq-default" code nil nil [1 32]) ("my-c-mode-common-hook" function nil nil [34 107]) ("add-hook" code nil nil [108 161]) ("load-file" code nil nil [697 740]) ("setq" code nil nil [741 788]) ("setq" code nil nil [789 840]) ("setq" code nil nil [841 903]) ("global-set-key" code nil nil [904 952]) ("sj-cpp" package nil nil [954 971]))
+    :file "sj-cpp.el"
+    :pointmax 971
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0pre4"
+  :semanticdb-version "2.0pre4"
+  )

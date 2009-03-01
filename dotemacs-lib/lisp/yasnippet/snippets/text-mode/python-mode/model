@@ -1,0 +1,10 @@
+# -*- coding: utf-8 -*-
+# name: model
+# contributor: Simon Jagoe
+# --
+class ${1:ClassName}(models.Model):
+    """ $3
+    """
+
+    def __unicode__(self):
+        return self.${4:name}

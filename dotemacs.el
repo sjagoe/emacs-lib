@@ -9,16 +9,11 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs-lib/lisp/yasnippet"))
 (add-to-list 'load-path (expand-file-name "~/.emacs-lib/lisp-personal"))
 
-;; Colour Theme
-(require 'color-theme)
-(load "color-theme-library.el")
-(color-theme-deep-blue)
-
 ;; Other's modules
 (require 'intelligent-close)
-(require yasnippet)
+(require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "D:\Vista\Users\Simon\.emacs-lib\lisp\yasnippet-0.5.9\snippets")
+(yas/load-directory "~/.emacs-lib/lisp/yasnippet/snippets")
 
 ;; My modules
 (require 'sj-misc-custom)
@@ -27,3 +22,4 @@
 (require 'sj-keys)
 ;;(require 'sj-ecb)
 
+;;(require 'sj-windows)

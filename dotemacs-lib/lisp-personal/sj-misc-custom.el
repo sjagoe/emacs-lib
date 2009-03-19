@@ -17,9 +17,8 @@
 
 (add-to-list 'default-frame-alist '(width . 80))
 (add-to-list 'default-frame-alist '(height . 66))
-(add-to-list 'default-frame-alist '(font . "-outline-Courier New-normal-r-normal-normal-11-82-96-96-c-*-iso8859-1"))
 
 ;; start the emacs server
-;(start-server)
+(server-start)
 
 (provide 'sj-misc-custom)

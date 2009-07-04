@@ -3,6 +3,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(color-theme-selection "Deep Blue" nil (color-theme)) ;; linux only
  '(blink-cursor-mode nil)
  '(indent-tabs-mode nil)
  '(column-number-mode t)

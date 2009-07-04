@@ -11,4 +11,8 @@
 (global-set-key (kbd "<f11>") 'other-frame)
 (global-set-key (kbd "C-x <f8>") 'ispell-buffer)
 
+(global-set-key (kbd "C-;") 'timeclock-change)
+(global-set-key (kbd "C-'") 'timeclock-in)
+(global-set-key (kbd "C-#") 'timeclock-out)
+
 (provide 'sj-keys)

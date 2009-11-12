@@ -1,5 +1,5 @@
 ;; Custom
-(setq custom-file "~/.emacs-custom.el")
+(setq custom-file "~/.emacs-lib/dotemacs-custom.el")
 (load custom-file)
 
 ;; Include paths

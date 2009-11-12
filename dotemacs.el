@@ -11,11 +11,12 @@
 
 ;; Other's modules
 (require 'intelligent-close)
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs-lib/lisp/yasnippet/snippets")
+;; (require 'yasnippet)
+;; (yas/initialize)
+;; (yas/load-directory "~/.emacs-lib/lisp/yasnippet/snippets")
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.pt$" . html-mode))
 
 ;; My modules
 (require 'sj-misc-custom)

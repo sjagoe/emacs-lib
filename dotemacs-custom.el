@@ -20,9 +20,10 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#102e4e" :foreground "#eeeeee" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 101 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
- '(rst-level-1-face ((t (:background "---"))) t)
- '(rst-level-2-face ((t (:background "---"))) t)
- '(rst-level-4-face ((t (:background "---"))) t)
- '(rst-level-5-face ((t (:background "---"))) t)
- '(rst-level-6-face ((t (:background "---"))) t)
+ '(rst-level-1-face ((t (:background "#102e4e"))) t)
+ '(rst-level-2-face ((t (:background "#102e4e"))) t)
+ '(rst-level-3-face ((t (:background "#102e4e"))) t)
+ '(rst-level-4-face ((t (:background "#102e4e"))) t)
+ '(rst-level-5-face ((t (:background "#102e4e"))) t)
+ '(rst-level-6-face ((t (:background "#102e4e"))) t)
  '(show-paren-match ((t (:background "DarkGreen" :foreground "yellow" :weight bold)))))

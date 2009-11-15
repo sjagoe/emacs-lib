@@ -31,4 +31,6 @@
 
 (desktop-save-mode t)
 
+(menu-bar-mode nil)
+
 ;;(require 'sj-windows)

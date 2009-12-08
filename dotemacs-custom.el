@@ -8,7 +8,7 @@
  '(column-number-mode t)
  '(ecb-options-version "2.32")
  '(indent-tabs-mode nil)
- '(org-agenda-files (quote ("~/Documents/org/personal/something.org" "~/Documents/org/jagoetech-portal.org" "~/Documents/org/portal_spike.org" "~/Documents/org/fidelis-infr.org" "~/Documents/org/jagoetech-comms.org" "~/Documents/org/business-administration.org")))
+ '(org-agenda-files (quote ("~/Documents/org/fidelis/london-hardware.org" "~/Documents/org/fidelis/vista-upgrade.org" "~/Documents/org/jagoetech/appliance.org" "~/Documents/org/personal/general.org" "~/Documents/org/jagoetech/portal.org" "~/Documents/org/don/grassroots.org" "~/Documents/org/personal/something.org" "~/Documents/org/jagoetech-portal.org" "~/Documents/org/portal_spike.org" "~/Documents/org/fidelis-infr.org" "~/Documents/org/jagoetech-comms.org" "~/Documents/org/business-administration.org")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tool-bar-mode nil)

@@ -10,6 +10,7 @@
 (global-set-key "\C-x\C-n" 'find-file-other-frame)
 (global-set-key (kbd "<f11>") 'other-frame)
 (global-set-key (kbd "C-x <f8>") 'ispell-buffer)
+(global-set-key (kbd "C-c a") 'org-agenda)
 
 (global-set-key (kbd "C-;") 'timeclock-change)
 (global-set-key (kbd "C-'") 'timeclock-in)

@@ -23,6 +23,7 @@
 (require 'sj-paren)
 (require 'sj-cpp)
 (require 'sj-keys)
+(require 'sj-org)
 ;;(require 'sj-ecb)
 
 (setq line-move-visual nil)

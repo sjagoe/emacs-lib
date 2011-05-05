@@ -24,6 +24,8 @@
 (require 'sj-cpp)
 (require 'sj-keys)
 (require 'sj-org)
+(require 'sj-python)
+(require 'sj-cython)
 ;;(require 'sj-ecb)
 
 (setq line-move-visual nil)
@@ -35,3 +37,14 @@
 (menu-bar-mode nil)
 
 ;;(require 'sj-windows)
+
+
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+;;; Move this code earlier if you want to reference
+;;; packages in your .emacs.
+(when
+    (load
+     (expand-file-name "~/.emacs.d/elpa/package.el"))
+  (package-initialize))

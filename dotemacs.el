@@ -19,6 +19,7 @@
 (add-to-list 'auto-mode-alist '("\\.pt$" . html-mode))
 
 ;; My modules
+(require 'sj-ediff)
 (require 'sj-misc-custom)
 (require 'sj-paren)
 (require 'sj-cpp)
@@ -37,6 +38,20 @@
 (menu-bar-mode nil)
 
 ;;(require 'sj-windows)
+
+
+(require 'markdown-mode)
+(require 'sj-markdown)
+
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+;;; Move this code earlier if you want to reference
+;;; packages in your .emacs.
+;; (when
+;;     (load
+;;      (expand-file-name "~/.emacs.d/elpa/package.el"))
+;;   (package-initialize))
 
 
 ;;; This was installed by package-install.el.

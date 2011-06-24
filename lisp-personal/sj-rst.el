@@ -5,4 +5,7 @@
                 ("\\.rst$" . rst-mode)
                 ("\\.rest$" . rst-mode)) auto-mode-alist))
 
+(add-hook 'rst-mode-hook 'whitespace-mode)
+(add-hook 'rst-mode-hook 'flyspell-mode)
+
 (provide 'sj-rst)

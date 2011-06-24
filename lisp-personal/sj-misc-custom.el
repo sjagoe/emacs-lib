@@ -2,7 +2,7 @@
 (ido-mode)
 
 ;; visible bell
-(setq visible-bell t)
+;(setq visible-bell t)
 
 ;; line and column numbers 
 (setq line-number-mode t)

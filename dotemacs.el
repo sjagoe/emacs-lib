@@ -29,6 +29,8 @@
 (require 'sj-cython)
 ;;(require 'sj-ecb)
 
+(require 'miles-bader)
+
 (setq line-move-visual nil)
 (setq truncate-partial-width-windows t)
 (setq indent-tabs-mode nil)
@@ -39,6 +41,11 @@
 
 ;;(require 'sj-windows)
 
+(setq mac-command-modifier 'meta)
+
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-deep-blue)
 
 (require 'markdown-mode)
 (require 'sj-markdown)

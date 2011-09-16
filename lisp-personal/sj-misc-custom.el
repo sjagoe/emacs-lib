@@ -1,5 +1,5 @@
 ;; Load ido-mode
-(ido-mode)
+(ido-mode t)
 
 ;; visible bell
 ;(setq visible-bell t)

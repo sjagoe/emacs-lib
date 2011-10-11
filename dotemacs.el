@@ -29,26 +29,18 @@
 (require 'sj-cython)
 ;;(require 'sj-ecb)
 
-(require 'miles-bader)
-
 (setq line-move-visual nil)
 (setq truncate-partial-width-windows t)
 (setq indent-tabs-mode nil)
 
 (desktop-save-mode t)
 
-(menu-bar-mode nil)
-
-;;(require 'sj-windows)
-
-(setq mac-command-modifier 'meta)
-
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-deep-blue)
+(require 'sj-windows)
 
 (require 'markdown-mode)
 (require 'sj-markdown)
+
+(menu-bar-mode nil)
 
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))

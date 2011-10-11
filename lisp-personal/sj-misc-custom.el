@@ -2,7 +2,7 @@
 (ido-mode t)
 
 ;; visible bell
-;(setq visible-bell t)
+(setq visible-bell t)
 
 ;; line and column numbers 
 (setq line-number-mode t)
@@ -15,8 +15,8 @@
 ;; (setq default-frame-alist
 ;;       '((width . 80) (height . 66)))
 
-(add-to-list 'default-frame-alist '(width . 80))
-(add-to-list 'default-frame-alist '(height . 66))
+;; (add-to-list 'default-frame-alist '(width . 80))
+;; (add-to-list 'default-frame-alist '(height . 66))
 
 ;; start the emacs server
 (server-start)

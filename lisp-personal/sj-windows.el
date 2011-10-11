@@ -1,12 +1,11 @@
 
 ;; Colour Theme
 (require 'color-theme)
-(load "color-theme-library.el")
+(color-theme-initialize)
 (color-theme-deep-blue)
 
-
-(add-to-list 'default-frame-alist '(font . "-outline-Courier New-normal-r-normal-normal-11-82-96-96-c-*-iso8859-1"))
-
+;; (add-to-list 'default-frame-alist '(font . "-outline-Courier New-normal-r-normal-normal-11-82-96-96-c-*-iso8859-1"))
+;; (add-to-list 'default-frame-alist '(font . "-*-Monaco-normal-r-*-*-17-102-120-120-c-*-iso8859-1"))
 
 ;; ;; Add GnuWin32 to the PATH
 ;; (setq -gnu-bin "C:\\Documents and Settings\\I491294\\Applications\\gnuwin32\\bin")

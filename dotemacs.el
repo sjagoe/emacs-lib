@@ -5,8 +5,7 @@
 ;; Include paths
 (add-to-list 'load-path (expand-file-name "~/.emacs-lib"))
 (add-to-list 'load-path (expand-file-name "~/.emacs-lib/lisp"))
-(add-to-list 'load-path (expand-file-name "~/.emacs-lib/lisp/ecb-2.32"))
-(add-to-list 'load-path (expand-file-name "~/.emacs-lib/lisp/yasnippet"))
+(add-to-list 'load-path (expand-file-name "~/.emacs-lib/lisp/ecb-snap"))
 (add-to-list 'load-path (expand-file-name "~/.emacs-lib/lisp-personal"))
 
 ;; Other's modules

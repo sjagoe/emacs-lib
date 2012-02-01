@@ -5,7 +5,7 @@
   ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
  '(column-number-mode t)
- '(ecb-options-version "2.32")
+ '(ecb-options-version "2.40")
  '(gud-pdb-command-name "c:/dev/projects/ext_win32/python264/python -u -m pdb")
  '(indent-tabs-mode nil)
  '(menu-bar-mode nil)

@@ -32,15 +32,35 @@
 (setq truncate-partial-width-windows t)
 (setq indent-tabs-mode nil)
 
-(desktop-save-mode t)
+;; (desktop-save-mode t)
+
+(menu-bar-mode nil)
 
 (require 'sj-windows)
 
 (require 'markdown-mode)
 (require 'sj-markdown)
 
-(menu-bar-mode nil)
-
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
+
+;; ;; CEDET
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (semantic-mode t)
+;; (global-ede-mode t)
+
+;; (setq semantic-default-submodes
+;;       '(global-semanticdb-minor-mode
+;;         global-semantic-idle-scheduler-mode
+;;         global-semantic-idle-summary-mode
+;;         global-semantic-idle-completions-mode
+;;         global-semantic-decoration-mode
+;;         global-semantic-highlight-func-mode
+;;         global-semantic-stickyfunc-mode))
+
+;; (if (boundp 'semantic-ia) (require 'semantic-ia))
+;; (if (boundp 'semantic-gcc) (require 'semantic-gcc))
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (require 'ecb)

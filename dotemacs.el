@@ -1,3 +1,6 @@
+;; to work around an error causing ecb to not byte-compile
+(setq filename nil)
+
 ;; Custom
 (setq custom-file "~/.emacs-lib/dotemacs-custom.el")
 (load custom-file)
@@ -32,9 +35,8 @@
 (setq truncate-partial-width-windows t)
 (setq indent-tabs-mode nil)
 
-;; (desktop-save-mode t)
+(desktop-save-mode t)
 
-(menu-bar-mode nil)
 
 (require 'sj-windows)
 
@@ -64,3 +66,13 @@
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; (require 'ecb)
+
+
+(defun increment-number-at-point ()
+  (interactive)
+  (skip-chars-backward "0123456789")
+  (or (looking-at "[0123456789]+")
+      (error "No number at point"))
+  (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
+
+(global-set-key (kbd "C-c +") 'increment-number-at-point)

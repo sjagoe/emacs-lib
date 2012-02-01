@@ -8,6 +8,24 @@
 
 (add-hook 'python-mode-hook 'whitespace-mode)
 
+(require 'gud)
+(gud-def gud-break
+         "break %d%f:%l"
+         "\C-b" "Set breakpoint at current line.")
+(gud-def gud-remove
+         "clear %d%f:%l"
+         "\C-d" "Remove breakpoint at current line")
+(defun better-pdb (&optional command-line)
+  (interactive)
+  (let ((result (if command-line
+		   (pdb command-line)
+		 (call-interactively 'pdb command-line))))
+    (gud-def gud-break  "break %d%f:%l"     "\C-b" "Set breakpoint at current line.")
+    (gud-def gud-remove "clear %d%f:%l"     "\C-d" "Remove breakpoint at current line")
+    result))
+
+(condition-case err
+    (require 'enaml))
 
 ;; (autoload 'pymacs-apply "pymacs")
 ;; (autoload 'pymacs-call "pymacs")

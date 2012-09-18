@@ -9,16 +9,19 @@
 
 ;; ;; Add GnuWin32 to the PATH
 ;; (setq -gnu-bin "C:\\Documents and Settings\\I491294\\Applications\\gnuwin32\\bin")
+;; (setq -git-bin "C:/ProgramData/Local/Applications/Git/bin")
 
 ;; (setenv
 ;;  "PATH"
 ;;  (concat
-;;   -gnu-bin
-;;   ";"
+;;   -gnu-bin ";"
+;;   -git-bin ";"
 ;;   (getenv "PATH")
 ;;   ))
 
 ;; (setq exec-path (cons -gnu-bin exec-path))
+
+;; (setq exec-path (cons -gnu-bin (cons -git-bin (cons -home-bin exec-path))))
 
 (setq this-is-w32
       (or (eq window-system 'w32)
@@ -36,6 +39,6 @@
 (setq ediff-split-window-function 'split-window-horizontally)
 
 ;; vc-git is really slow in windows ...
-(setq vc-handled-backends nil)
+;; (setq vc-handled-backends nil)
 
 (provide 'sj-windows)

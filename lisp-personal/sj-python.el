@@ -35,4 +35,6 @@
 ;;(eval-after-load "pymacs"
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
+(require 'pyflakes)
+
 (provide 'sj-python)

@@ -3,11 +3,12 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(color-theme-selection "Deep Blue" nil (color-theme))
  '(blink-cursor-mode nil)
  '(color-theme-selection "Deep Blue" nil (color-theme))
  '(column-number-mode t)
  '(ecb-options-version "2.32")
- '(gud-pdb-command-name "c:/dev/projects/ext_win32/python264/python -u -m pdb")
+ '(gud-pdb-command-name "python -u -m pdb")
  '(indent-tabs-mode nil)
  '(menu-bar-mode nil)
  '(org-agenda-files (quote ("~/Documents/org/sview.org")))

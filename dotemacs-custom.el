@@ -3,10 +3,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(blink-cursor-mode nil)
  '(column-number-mode t)
+ '(custom-enabled-themes (quote (tsdh-dark)))
  '(debug-on-error nil)
- '(ecb-options-version "2.40")
  '(gud-pdb-command-name "c:/dev/projects/ext_win32/python264/python -u -m pdb")
  '(indent-tabs-mode nil)
  '(menu-bar-mode nil)
@@ -15,17 +16,27 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
- '(whitespace-style (quote (face tabs spaces space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))))
+ '(whitespace-style (quote (face tabs spaces trailing lines-tail space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "outline" :family "DejaVu Sans Mono"))))
- '(whitespace-hspace ((t (:background "LemonChiffon3" :foreground "lightgray"))))
- '(whitespace-newline ((t (:foreground "darkgray" :weight normal))))
- '(whitespace-space ((t (:foreground "darkgray"))))
- '(whitespace-tab ((t (:background "beige" :foreground "darkgray")))))
+ '(default ((t (:height 113 :family "DejaVu Sans Mono"))))
+ '(whitespace-newline ((t (:foreground "gray28" :weight normal))))
+ '(whitespace-space ((t (:foreground "gray29"))))
+ '(whitespace-tab ((t (:background "red1" :foreground "yellow" :weight bold)))))
+
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(default ((t (:inherit nil :stipple nil :background "SystemWindow" :foreground "SystemWindowText" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 112 :width normal :foundry "outline" :family "DejaVu Sans Mono"))))
+;;  '(whitespace-hspace ((t (:background "LemonChiffon3" :foreground "lightgray"))))
+;;  '(whitespace-newline ((t (:foreground "DodgerBlue4" :weight normal))))
+;;  '(whitespace-space ((t (:foreground "darkgray"))))
+;;  '(whitespace-tab ((t (:background "red1" :foreground "yellow" :weight bold)))))
 
 ; '(default ((t (:inherit nil :stipple nil :background "#102e4e" :foreground "#eeeeee" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 101 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
 ; '(default ((t (:inherit nil :stipple nil :background "#102e4e" :foreground "#eeeeee" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "outline" :family "DejaVu Sans Mono"))))

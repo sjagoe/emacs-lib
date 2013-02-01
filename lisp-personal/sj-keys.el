@@ -16,4 +16,9 @@
 (global-set-key (kbd "C-'") 'timeclock-in)
 (global-set-key (kbd "C-#") 'timeclock-out)
 
+(global-set-key "\M-?" 'etags-select-find-tag)
+(global-set-key "\M-." 'etags-select-find-tag-at-point)
+
+(global-set-key "\C-xv\-" 'magit-status)
+
 (provide 'sj-keys)

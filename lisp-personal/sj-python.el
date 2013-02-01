@@ -8,6 +8,8 @@
 
 (add-hook 'python-mode-hook 'whitespace-mode)
 
+(require 'pyflakes)
+
 (require 'gud)
 (gud-def gud-break
          "break %d%f:%l"

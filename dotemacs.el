@@ -27,8 +27,6 @@
 (require 'sj-cpp)
 (require 'sj-keys)
 (require 'sj-org)
-(require 'sj-python)
-(require 'sj-cython)
 ;;(require 'sj-ecb)
 
 (setq line-move-visual nil)
@@ -44,7 +42,10 @@
 (require 'sj-markdown)
 
 (require 'package)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 ;; ;; CEDET
@@ -76,3 +77,6 @@
   (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
 
 (global-set-key (kbd "C-c +") 'increment-number-at-point)
+
+(require 'sj-python)
+(require 'sj-cython)

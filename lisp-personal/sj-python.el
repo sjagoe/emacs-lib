@@ -51,11 +51,41 @@
     (py-execute-buffer)))
 
 
+;; (defun python-show-function-name ()
+;;   "Message the name of the function the point is in"
+;;   (interactive)
+;;   (save-excursion
+;;     (beginning-of-defun)
+;;     (message (format "%s" (thing-at-point 'line)))))
+
+
+(require 'magit)
+
+
+(defun py-git-dir ()
+  "Returns the top-level directory of a git repository"
+  (file-name-directory (directory-file-name (magit-git-dir))))
+
+
+(defun py-run-tests-in-directory (tests-dir)
+  "Executes \"python -m unittest discover\" in the selected
+  directory"
+  (interactive (list (read-directory-name "Directory: " (py-git-dir))))
+  (let ((default-directory tests-dir))
+    (compile (concat "python -m unittest discover"))))
+
+
 (add-hook 'python-mode-hook
           (lambda ()
             (local-set-key
-             (kbd "C-x r p")
+             (kbd "C-x t f")
              'py-run-test)))
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key
+             (kbd "C-x t d")
+             'py-run-tests-in-directory)))
 
 
 (provide 'sj-python)

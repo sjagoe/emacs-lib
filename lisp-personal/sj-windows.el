@@ -11,16 +11,19 @@
 (setq -gnu-bin "C:\\Software\\gnuwin32\\bin")
 (setq -git-bin "C:\\Software\\Git\\bin")
 (setq -home-bin "C:\\Documents and Settings\\enthought-admin\\bin")
+(setq -gnutls-bin "C:\\Software\\gnutls-3.0.9\\bin")
 
 (setenv
  "PATH"
  (concat
   -gnu-bin ";"
   -git-bin ";"
+  -gnutls-bin ";"
+  -home-bin ";"
   (getenv "PATH")
   ))
 
-(setq exec-path (cons -gnu-bin (cons -git-bin exec-path)))
+(setq exec-path (cons -gnu-bin (cons -git-bin (cons -gnutls-bin (cons -home-bin exec-path)))))
 
 (setq this-is-w32
       (or (eq window-system 'w32)

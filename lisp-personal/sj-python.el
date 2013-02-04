@@ -7,6 +7,7 @@
                 ("\\.pxi$" . python-mode)) auto-mode-alist))
 
 (add-hook 'python-mode-hook 'whitespace-mode)
+(add-hook 'python-mode-hook 'flycheck-mode)
 
 (require 'pyflakes)
 

@@ -78,5 +78,6 @@
 
 (global-set-key (kbd "C-c +") 'increment-number-at-point)
 
+(require 'sj-jabber)
 (require 'sj-python)
 (require 'sj-cython)

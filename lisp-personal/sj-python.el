@@ -38,5 +38,23 @@
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
 
+;; (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
+
+
+(defun py-run-test ()
+  (interactive)
+  (if (string-match
+       (rx bos "test_")
+       (file-name-nondirectory (buffer-file-name)))
+      (compile (concat "python " (concat "\"" (buffer-file-name) "\"")))
+    (py-execute-buffer)))
+
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key
+             (kbd "C-x r p")
+             'py-run-test)))
+
 
 (provide 'sj-python)

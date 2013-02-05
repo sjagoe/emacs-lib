@@ -40,57 +40,87 @@
 
 
 
-;; (defun python-match-defun-name ()
-;;   (save-excursion
-;;     (beginning-of-defun)
-;;     (let ((def-line (thing-at-point 'line)))
-;;       (if (string-match
-;;            (rx (and (submatch (0+ "    ")) (submatch (or "def" "class")) " "
-;;                     (submatch (in "a-zA-Z_") (0+ (in "a-zA-Z_0-9"))) "("))
-;;            def-line)
-;;           def-line))))
+(defvar sj-python-indent-str "    ")
 
 
-;; (defun python-get-defun-name (def-line)
-;;   (match-string-no-properties 3 def-line))
+(defun sj-how-many-str (regexp str)
+  (loop with start = 0
+        for count from 0
+        while (string-match regexp str start)
+        do (setq start (match-end 0))
+        finally return count))
 
 
-;; (defun python-defun-is-class (def-line)
-;;   (string= (match-string-no-properties 2 def-line) "class"))
+(defun sj-python-match-defun-name ()
+  (save-excursion
+    (beginning-of-defun)
+    (let ((def-line (thing-at-point 'line)))
+      (if (string-match
+           (rx (and (submatch (0+ "    ")) (submatch (or "def" "class")) " "
+                    (submatch (in "a-zA-Z_") (0+ (in "a-zA-Z_0-9"))) "("))
+           def-line)
+          def-line))))
 
 
-;; (defun python-defun-is-function (def-line)
-;;   (string= (match-string-no-properties 2 def-line) "def"))
+(defun sj-python-get-defun-name (def-line)
+  (match-string-no-properties 3 def-line))
 
 
-;; (defun python-get-class-function-name ()
-;;   (let ((def-line (python-match-defun-name)))
-;;     (if def-line
-;;         (let ((function-name (python-get-defun-name def-line)))
-;;           (let ((foo (message (format "fn-name: %s" function-name))))
-;;             (if (python-defun-is-function def-line)
-;;                 (save-excursion
-;;                   (beginning-of-defun)
-;;                   (beginning-of-line)
-;;                   (let ((class-line (python-match-defun-name)))
-;;                     (if class-line
-;;                         (let ((class-name (python-get-defun-name class-line)))
-;;                           (if class-name
-;;                               (concat class-name "." function-name)
-;;                             function-name))
-;;                       function-name)))
-;;               function-name))))))
+(defun sj-python-defun-is-class (def-line)
+  (string= (match-string-no-properties 2 def-line) "class"))
 
 
-;; (defun python-print-defun-name ()
+(defun sj-python-defun-is-function (def-line)
+  (string= (match-string-no-properties 2 def-line) "def"))
+
+
+(defun -beg-def (indent outer-indent count inner)
+  (message (format "-beg-def %s %s %s %s" indent outer-indent count inner))
+  (beginning-of-defun))
+
+
+(defun sj-python-get-enclosing-scope-name ()
+  "FIXME: (Really) Dirty way of finding name of enclosing scope"
+  (save-excursion
+    (let ((this-scope-defun (sj-python-match-defun-name)))
+      (if this-scope-defun
+          (let ((indent-level (sj-how-many-str
+                               sj-python-indent-str
+                               (match-string-no-properties 1 this-scope-defun)))
+                (outer-scope-defun this-scope-defun))
+            (if (> indent-level 0)
+                (loop for count from 0
+                      while (and outer-scope-defun
+                                 (<= indent-level (sj-how-many-str sj-python-indent-str
+                                                                   outer-scope-defun)))
+                      do (loop for inner-count from 0
+                               while (>= count inner-count)
+                               do (-beg-def indent-level (sj-how-many-str sj-python-indent-str outer-scope-defun) count inner-count)
+                               finally return (setq outer-scope-defun (sj-python-match-defun-name)))
+                      finally return (if outer-scope-defun
+                                         (sj-python-get-defun-name outer-scope-defun)))))))))
+
+
+;; (defun sj-python-print-enclosing-scope-name ()
 ;;   (interactive)
-;;   (message (format "%s" (python-get-class-function-name))))
-;;   ;; "Message the name of the function/class the point is in"
-;;   ;; (interactive)
-;;   ;; (let ((def-line (python-match-defun-name)))
-;;   ;;   (if def-line
-;;   ;;       (message (format "%s" (python-get-defun-name def-line))))))
+;;   (message (format "%s" (sj-python-get-enclosing-scope-name))))
 
+
+(defun sj-python-get-class-function-name ()
+  (let ((def-line (sj-python-match-defun-name)))
+    (if def-line
+        (let ((function-name (sj-python-get-defun-name def-line)))
+          (if (sj-python-defun-is-function def-line)
+              (let ((enclosing-scope (sj-python-get-enclosing-scope-name)))
+                (if enclosing-scope
+                    (concat enclosing-scope "." function-name)
+                  function-name))
+            function-name)))))
+
+
+;; (defun sj-python-print-defun-name ()
+;;   (interactive)
+;;   (message (format "%s" (sj-python-get-class-function-name))))
 
 
 
@@ -127,15 +157,15 @@
   (interactive "P")
   (let ((python-arg (py-get-test-file-name)))
     (run-unittests-in-cmd-exe
-     (verbose-cmd (concat "python " (concat "\"" python-arg "\"")) verbose))))
+     (verbose-cmd (concat "python " python-arg ) verbose))))
 
 
-;; (defun py-run-single-test (verbose)
-;;   (interactive "P")
-;;   (let ((python-arg (py-get-test-file-name)))
-;;     (let ((test-cmd (verbose-cmd (concat "python " (concat "\"" python-arg "\"")) verbose)))
-;;     (run-unittests-in-cmd-exe
-;;      (concat test-cmd " " (python-get-class-function-name))))))
+(defun py-run-single-test (verbose)
+  (interactive "P")
+  (let ((python-arg (py-get-test-file-name)))
+    (let ((test-cmd (verbose-cmd (concat "python " python-arg) verbose)))
+    (run-unittests-in-cmd-exe
+     (concat test-cmd " " (sj-python-get-class-function-name))))))
 
 
 (require 'magit)
@@ -173,6 +203,13 @@
             (local-set-key
              (kbd "C-x t f")
              'py-run-test-case)))
+
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key
+             (kbd "C-x t s")
+             'py-run-single-test)))
 
 
 (add-hook 'python-mode-hook

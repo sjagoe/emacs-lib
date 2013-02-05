@@ -23,6 +23,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:height 113 :family "DejaVu Sans Mono"))))
+ '(flycheck-error-face ((t (:background "gray50" :slant oblique))))
+ '(flycheck-warning-face ((t (:background "gray35" :slant oblique))))
+ '(magit-item-highlight ((t nil)))
  '(whitespace-newline ((t (:foreground "gray28" :weight normal))))
  '(whitespace-space ((t (:foreground "gray29"))))
  '(whitespace-tab ((t (:background "red1" :foreground "yellow" :weight bold)))))

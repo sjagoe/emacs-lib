@@ -7,6 +7,9 @@
                 ("\\.pxi$" . python-mode)) auto-mode-alist))
 
 (add-hook 'python-mode-hook 'whitespace-mode)
+(add-hook 'python-mode-hook 'flycheck-mode)
+
+(require 'pyflakes)
 
 (require 'gud)
 (gud-def gud-break
@@ -24,8 +27,8 @@
     (gud-def gud-remove "clear %d%f:%l"     "\C-d" "Remove breakpoint at current line")
     result))
 
-(condition-case err
-    (require 'enaml))
+;; (condition-case err
+;;     (require 'enaml))
 
 ;; (autoload 'pymacs-apply "pymacs")
 ;; (autoload 'pymacs-call "pymacs")
@@ -35,6 +38,17 @@
 ;;(eval-after-load "pymacs"
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
-(require 'pyflakes)
+
+(require 'sj-unittest-mode)
+
+
+(require 'flycheck)
+
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key
+             (kbd "C-x t g")
+             'flycheck-compile)))
 
 (provide 'sj-python)

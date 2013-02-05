@@ -1,5 +1,5 @@
 ;; Load ido-mode
-(ido-mode)
+(ido-mode t)
 
 ;; visible bell
 (setq visible-bell t)
@@ -15,8 +15,8 @@
 ;; (setq default-frame-alist
 ;;       '((width . 80) (height . 66)))
 
-(add-to-list 'default-frame-alist '(width . 80))
-(add-to-list 'default-frame-alist '(height . 66))
+;; (add-to-list 'default-frame-alist '(width . 80))
+;; (add-to-list 'default-frame-alist '(height . 66))
 
 (setenv "PATH" (concat (getenv "PATH") ":/home/simon/bin"))
 (setq exec-path (append exec-path '("/home/simon/bin")))

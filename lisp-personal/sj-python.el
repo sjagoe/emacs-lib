@@ -51,5 +51,4 @@
              (kbd "C-x t g")
              'flycheck-compile)))
 
-
 (provide 'sj-python)

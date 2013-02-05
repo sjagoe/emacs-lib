@@ -21,4 +21,6 @@
 ;; start the emacs server
 (server-start)
 
+(require 'etags-select)
+
 (provide 'sj-misc-custom)

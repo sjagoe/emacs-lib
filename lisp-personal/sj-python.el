@@ -39,24 +39,103 @@
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
 
-;; (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
-
-(defun py-run-test ()
-  (interactive)
-  (if (string-match
-       (rx bos "test_")
-       (file-name-nondirectory (buffer-file-name)))
-      (compile (concat "python " (concat "\"" (buffer-file-name) "\"")))
-    (py-execute-buffer)))
-
-
-;; (defun python-show-function-name ()
-;;   "Message the name of the function the point is in"
-;;   (interactive)
+;; (defun python-match-defun-name ()
 ;;   (save-excursion
 ;;     (beginning-of-defun)
-;;     (message (format "%s" (thing-at-point 'line)))))
+;;     (let ((def-line (thing-at-point 'line)))
+;;       (if (string-match
+;;            (rx (and (submatch (0+ "    ")) (submatch (or "def" "class")) " "
+;;                     (submatch (in "a-zA-Z_") (0+ (in "a-zA-Z_0-9"))) "("))
+;;            def-line)
+;;           def-line))))
+
+
+;; (defun python-get-defun-name (def-line)
+;;   (match-string-no-properties 3 def-line))
+
+
+;; (defun python-defun-is-class (def-line)
+;;   (string= (match-string-no-properties 2 def-line) "class"))
+
+
+;; (defun python-defun-is-function (def-line)
+;;   (string= (match-string-no-properties 2 def-line) "def"))
+
+
+;; (defun python-get-class-function-name ()
+;;   (let ((def-line (python-match-defun-name)))
+;;     (if def-line
+;;         (let ((function-name (python-get-defun-name def-line)))
+;;           (let ((foo (message (format "fn-name: %s" function-name))))
+;;             (if (python-defun-is-function def-line)
+;;                 (save-excursion
+;;                   (beginning-of-defun)
+;;                   (beginning-of-line)
+;;                   (let ((class-line (python-match-defun-name)))
+;;                     (if class-line
+;;                         (let ((class-name (python-get-defun-name class-line)))
+;;                           (if class-name
+;;                               (concat class-name "." function-name)
+;;                             function-name))
+;;                       function-name)))
+;;               function-name))))))
+
+
+;; (defun python-print-defun-name ()
+;;   (interactive)
+;;   (message (format "%s" (python-get-class-function-name))))
+;;   ;; "Message the name of the function/class the point is in"
+;;   ;; (interactive)
+;;   ;; (let ((def-line (python-match-defun-name)))
+;;   ;;   (if def-line
+;;   ;;       (message (format "%s" (python-get-defun-name def-line))))))
+
+
+
+
+(define-compilation-mode unittest-mode "unittest"
+  "A compilation buffer for Python unittest")
+
+
+(defun verbose-cmd (cmd verbose)
+  "Returns the command used to execute unit tests"
+  (let ((verbose-flag
+         (if verbose
+             " -v"
+           "")))
+    (concat cmd verbose-flag)))
+
+
+(defun run-unittests-in-cmd-exe (command)
+  (compilation-start
+   (concat "cmd.exe /c \"" command "\"")
+   'unittest-mode))
+
+
+(defun py-get-test-file-name ()
+  (let ((dirname (file-name-directory (buffer-file-name))))
+    (let ((filename (file-name-nondirectory (buffer-file-name))))
+      (let ((python-arg
+             (if (string-match (rx bos "test_") filename)
+                 (buffer-file-name)
+               (concat dirname "tests/test_" filename))))
+        python-arg))))
+
+
+(defun py-run-test-case (verbose)
+  (interactive "P")
+  (let ((python-arg (py-get-test-file-name)))
+    (run-unittests-in-cmd-exe
+     (verbose-cmd (concat "python " (concat "\"" python-arg "\"")) verbose))))
+
+
+;; (defun py-run-single-test (verbose)
+;;   (interactive "P")
+;;   (let ((python-arg (py-get-test-file-name)))
+;;     (let ((test-cmd (verbose-cmd (concat "python " (concat "\"" python-arg "\"")) verbose)))
+;;     (run-unittests-in-cmd-exe
+;;      (concat test-cmd " " (python-get-class-function-name))))))
 
 
 (require 'magit)
@@ -67,25 +146,57 @@
   (file-name-directory (directory-file-name (magit-git-dir))))
 
 
+(defun py-unittest-discover-cmd (verbose)
+  "Returns the command used to execute unit tests"
+    (verbose-cmd "python -m unittest discover" verbose))
+
+
 (defun py-run-tests-in-directory (tests-dir)
   "Executes \"python -m unittest discover\" in the selected
   directory"
-  (interactive (list (read-directory-name "Directory: " (py-git-dir))))
-  (let ((default-directory tests-dir))
-    (compile (concat "python -m unittest discover"))))
+  (interactive (list (read-directory-name "Run tests in: " (py-git-dir))))
+  (let ((verbose current-prefix-arg)
+        (default-directory tests-dir))
+    (run-unittests-in-cmd-exe (py-unittest-discover-cmd verbose))))
+
+
+(defun py-run-tests-in-current-directory (verbose)
+  "Executes \"python -m unittest discover\" in the selected
+  directory"
+  (interactive "P")
+  (let ((default-directory (file-name-directory (directory-file-name (buffer-file-name)))))
+    (run-unittests-in-cmd-exe (py-unittest-discover-cmd verbose))))
 
 
 (add-hook 'python-mode-hook
           (lambda ()
             (local-set-key
              (kbd "C-x t f")
-             'py-run-test)))
+             'py-run-test-case)))
+
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key
+             (kbd "C-x t t")
+             'py-run-tests-in-directory)))
+
 
 (add-hook 'python-mode-hook
           (lambda ()
             (local-set-key
              (kbd "C-x t d")
-             'py-run-tests-in-directory)))
+             'py-run-tests-in-current-directory)))
+
+
+(require 'flycheck)
+
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key
+             (kbd "C-x t g")
+             'flycheck-compile)))
 
 
 (provide 'sj-python)

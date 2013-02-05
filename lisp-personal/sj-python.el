@@ -130,6 +130,7 @@
   "A compilation buffer for Python unittest")
 
 
+
 (defun verbose-cmd (cmd verbose)
   "Returns the command used to execute unit tests"
   (let ((verbose-flag
@@ -139,10 +140,11 @@
     (concat cmd verbose-flag)))
 
 
-(defun run-unittests-in-cmd-exe (command)
-  (compilation-start
-   (concat "cmd.exe /c \"" command "\"")
-   'unittest-mode))
+(defun run-in-cmd-exe (command &mode-arg)
+  (let ((mode (if &mode-arg &mode-arg 'unittest-mode)))
+    (compilation-start
+     (concat "cmd.exe /c \"" command "\"")
+     mode)))
 
 
 (defun py-get-test-file-name ()
@@ -158,7 +160,7 @@
 (defun py-run-test-case (verbose)
   (interactive "P")
   (let ((python-arg (py-get-test-file-name)))
-    (run-unittests-in-cmd-exe
+    (run-in-cmd-exe
      (verbose-cmd (concat "python " python-arg ) verbose))))
 
 
@@ -166,7 +168,7 @@
   (interactive "P")
   (let ((python-arg (py-get-test-file-name)))
     (let ((test-cmd (verbose-cmd (concat "python " python-arg) verbose)))
-    (run-unittests-in-cmd-exe
+    (run-in-cmd-exe
      (concat test-cmd " " (sj-python-get-class-function-name))))))
 
 
@@ -189,7 +191,7 @@
   (interactive (list (read-directory-name "Run tests in: " (py-git-dir))))
   (let ((verbose current-prefix-arg)
         (default-directory tests-dir))
-    (run-unittests-in-cmd-exe (py-unittest-discover-cmd verbose))))
+    (run-in-cmd-exe (py-unittest-discover-cmd verbose))))
 
 
 (defun py-run-tests-in-current-directory (verbose)
@@ -197,7 +199,19 @@
   directory"
   (interactive "P")
   (let ((default-directory (file-name-directory (directory-file-name (buffer-file-name)))))
-    (run-unittests-in-cmd-exe (py-unittest-discover-cmd verbose))))
+    (run-in-cmd-exe (py-unittest-discover-cmd verbose))))
+
+
+(defun py-execute-current-file ()
+  (interactive)
+  (run-in-cmd-exe (buffer-file-name) nil))
+
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key
+             (kbd "C-x t r")
+             'py-execute-current-file)))
 
 
 (add-hook 'python-mode-hook

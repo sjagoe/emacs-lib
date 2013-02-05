@@ -1,3 +1,6 @@
+(require 'compile)
+
+(require 'cl)
 
 
 (defvar unittest-indent-str "    ")

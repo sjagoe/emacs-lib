@@ -113,7 +113,9 @@
           (if (sj-python-defun-is-function def-line)
               (let ((enclosing-scope (sj-python-get-enclosing-scope-name)))
                 (if enclosing-scope
-                    (concat enclosing-scope "." function-name)
+                    (if (string-match (rx bos "test_") function-name)
+                        (concat enclosing-scope "." function-name)
+                      enclosing-scope)
                   function-name))
             function-name)))))
 

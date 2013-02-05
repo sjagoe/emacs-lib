@@ -81,3 +81,5 @@
 (require 'sj-jabber)
 (require 'sj-python)
 (require 'sj-cython)
+
+(setq-default display-buffer-reuse-frames t)

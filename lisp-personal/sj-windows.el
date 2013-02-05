@@ -40,6 +40,11 @@
 
 (setq ediff-split-window-function 'split-window-horizontally)
 
+(set-default buffer-file-coding-system 'iso-latin-1-unix)
+(set-default-coding-systems 'iso-latin-1-unix)
+(prefer-coding-system 'iso-latin-1-unix)
+(set-default default-buffer-file-coding-system 'iso-latin-1-unix)
+
 ;; vc-git is really slow in windows ...
 ;; (setq vc-handled-backends nil)
 

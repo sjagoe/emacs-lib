@@ -171,7 +171,18 @@ all tests for the module are run."
 (defun unittest-execute-current-file ()
   "Executes the current buffer"
   (interactive)
-  (run-in-shell (buffer-file-name)))
+  (run-in-shell (concat "python " (buffer-file-name))))
+
+
+(defun unittest-execute-current-module ()
+  "Executes the current buffer as python -m package.module"
+  (interactive)
+  (let ((top-level (unittest-setup-py-directory)))
+    (let ((module-file (file-name-sans-extension
+                        (file-relative-name (buffer-file-name)
+                                            top-level))))
+      (let ((package-module (replace-regexp-in-string "/" "." module-file)))
+        (run-in-shell (concat "python -m " package-module))))))
 
 
 (add-hook 'python-mode-hook
@@ -179,6 +190,13 @@ all tests for the module are run."
             (local-set-key
              (kbd "C-x t r")
              'unittest-execute-current-file)))
+
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key
+             (kbd "C-x t m")
+             'unittest-execute-current-module)))
 
 
 (add-hook 'python-mode-hook

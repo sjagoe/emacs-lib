@@ -27,8 +27,8 @@
     (gud-def gud-remove "clear %d%f:%l"     "\C-d" "Remove breakpoint at current line")
     result))
 
-;; (condition-case err
-;;     (require 'enaml))
+
+(require 'enaml)
 
 ;; (autoload 'pymacs-apply "pymacs")
 ;; (autoload 'pymacs-call "pymacs")

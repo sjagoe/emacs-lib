@@ -174,15 +174,34 @@ all tests for the module are run."
   (run-in-shell (concat "python " (buffer-file-name))))
 
 
+(defun unittest-execute-module-file (module-file)
+  "Takes a path to a python module, relative to the packages
+directory, turns it into a dotted package name and executes with
+'python -m'.
+
+e.g. foo/bar will be executed as 'python -m foo.bar'"
+  (let ((package-module (replace-regexp-in-string "/" "." module-file)))
+    (run-in-shell (concat "python -m " package-module))))
+
+
 (defun unittest-execute-current-module ()
-  "Executes the current buffer as python -m package.module"
+  "Executes the current buffer as python -m package.module.
+
+e.g. /home/simon/packages/some-package/foo/bar.py will be
+executed as 'python -m foo.bar', assuming the sop-level is in
+some-package (as determined by a setup.py file)"
   (interactive)
   (let ((top-level (unittest-setup-py-directory)))
     (let ((module-file (file-name-sans-extension
                         (file-relative-name (buffer-file-name)
                                             top-level))))
-      (let ((package-module (replace-regexp-in-string "/" "." module-file)))
-        (run-in-shell (concat "python -m " package-module))))))
+      (if (string= (file-name-nondirectory module-file) "__main__")
+          (let ((package-directory (file-name-directory module-file)))
+            (let ((module-file (directory-file-name package-directory)))
+              (if (not (string= module-file ""))
+                  (unittest-execute-module-file module-file)
+                (error (concat "No python package found at " package-directory)))))
+        (unittest-execute-module-file module-file)))))
 
 
 (add-hook 'python-mode-hook

@@ -87,6 +87,9 @@
 (define-compilation-mode unittest-mode "unittest"
   "A compilation buffer for Python unittest")
 
+(define-compilation-mode python-exec-mode "python-exec"
+  "A compilation buffer for Python unittest")
+
 
 (defun verbose-cmd (cmd verbose)
   "Returns the command used to execute unit tests"
@@ -100,12 +103,13 @@
 (defvar shell-exec "cmd /c")
 
 
-(defun run-in-shell (command)
-  (compilation-start
-   (if shell-exec
-       (concat shell-exec " \"" command "\"")
-     command)
-   'unittest-mode))
+(defun run-in-shell (command &optional mode)
+  (let ((mode (if mode mode 'unittest-mode)))
+    (compilation-start
+     (if shell-exec
+         (concat shell-exec " \"" command "\"")
+       command)
+     mode)))
 
 
 (defun unittest-get-test-file-name ()
@@ -171,7 +175,7 @@ all tests for the module are run."
 (defun unittest-execute-current-file ()
   "Executes the current buffer"
   (interactive)
-  (run-in-shell (concat "python " (buffer-file-name))))
+  (run-in-shell (concat "python " (buffer-file-name)) 'python-exec-mode))
 
 
 (defun unittest-execute-module-file (module-file)
@@ -181,7 +185,7 @@ directory, turns it into a dotted package name and executes with
 
 e.g. foo/bar will be executed as 'python -m foo.bar'"
   (let ((package-module (replace-regexp-in-string "/" "." module-file)))
-    (run-in-shell (concat "python -m " package-module))))
+    (run-in-shell (concat "python -m " package-module) 'python-exec-mode)))
 
 
 (defun unittest-execute-current-module ()

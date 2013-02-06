@@ -171,7 +171,7 @@ all tests for the module are run."
 (defun unittest-execute-current-file ()
   "Executes the current buffer"
   (interactive)
-  (run-in-shell (buffer-file-name)))
+  (run-in-shell (concat "python " (buffer-file-name))))
 
 
 (add-hook 'python-mode-hook

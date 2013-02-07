@@ -10,6 +10,7 @@
  '(debug-on-error nil)
  '(gud-pdb-command-name "python -u -m pdb")
  '(indent-tabs-mode nil)
+ '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
  '(menu-bar-mode nil)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)

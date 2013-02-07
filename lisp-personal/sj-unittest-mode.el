@@ -103,6 +103,11 @@
 (defvar shell-exec "bash -c")
 
 
+;; use Python's unbuffered stdout option so that output is displayed
+;; immediately in the compilation-mode buffer
+(defvar python-command "python -u")
+
+
 (defun run-in-shell (command &optional mode)
   (let ((mode (if mode mode 'unittest-mode)))
     (compilation-start
@@ -128,7 +133,7 @@
   (interactive "P")
   (let ((python-arg (unittest-get-test-file-name)))
     (run-in-shell
-     (verbose-cmd (concat "python " python-arg ) verbose))))
+     (verbose-cmd (concat python-command " " python-arg ) verbose))))
 
 
 (defun unittest-run-single-test (verbose)
@@ -137,7 +142,7 @@ test, the test case will be executed. If point is not in a test,
 all tests for the module are run."
   (interactive "P")
   (let ((python-arg (unittest-get-test-file-name)))
-    (let ((test-cmd (verbose-cmd (concat "python " python-arg) verbose)))
+    (let ((test-cmd (verbose-cmd (concat python-command " " python-arg) verbose)))
     (run-in-shell
      (concat test-cmd " " (unittest-get-class-function-name))))))
 
@@ -154,7 +159,7 @@ all tests for the module are run."
 
 (defun unittest-unittest-discover-cmd (verbose)
   "Returns the command used to execute unit tests"
-  (verbose-cmd "python -m unittest discover" verbose))
+  (verbose-cmd (concat python-command " -m unittest discover" verbose)))
 
 
 (defun unittest-run-tests-in-directory (tests-dir)
@@ -185,7 +190,7 @@ directory, turns it into a dotted package name and executes with
 
 e.g. foo/bar will be executed as 'python -m foo.bar'"
   (let ((package-module (replace-regexp-in-string "/" "." module-file)))
-    (run-in-shell (concat "python -m " package-module) 'python-exec-mode)))
+    (run-in-shell (concat python-command " -m " package-module) 'python-exec-mode)))
 
 
 (defun unittest-execute-current-module ()

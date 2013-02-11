@@ -1,6 +1,12 @@
 ; https://bitbucket.org/birkenfeld/cython/src/66700d1d92e2/Tools/cython-mode.el
 ;(require 'cython-mode)
 
+(require 'gud)
+(require 'pyflakes)
+(require 'enaml)
+(require 'unittest)
+(require 'flycheck)
+
 (setq auto-mode-alist
       (append '(("\\.pyx$" . python-mode)
                 ("\\.pxd$" . python-mode)
@@ -8,10 +14,9 @@
 
 (add-hook 'python-mode-hook 'whitespace-mode)
 (add-hook 'python-mode-hook 'flycheck-mode)
+(add-hook 'python-mode-hook 'unittest-mode)
 
-(require 'pyflakes)
 
-(require 'gud)
 (gud-def gud-break
          "break %d%f:%l"
          "\C-b" "Set breakpoint at current line.")
@@ -28,8 +33,6 @@
     result))
 
 
-(require 'enaml)
-
 ;; (autoload 'pymacs-apply "pymacs")
 ;; (autoload 'pymacs-call "pymacs")
 ;; (autoload 'pymacs-eval "pymacs" nil t)
@@ -39,16 +42,11 @@
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
 
-(require 'sj-unittest-mode)
-
-
-(require 'flycheck)
-
-
 (add-hook 'python-mode-hook
           (lambda ()
             (local-set-key
              (kbd "C-x t g")
              'flycheck-compile)))
+
 
 (provide 'sj-python)

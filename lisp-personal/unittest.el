@@ -1,6 +1,27 @@
 (require 'compile)
-
 (require 'cl)
+
+
+(defgroup unittest nil
+  "Run Python unit tests in a compilation-mode buffer"
+  :prefix "unittest-"
+  :group 'tools)
+
+
+(defcustom shell-exec
+  "bash -c"
+  "Command to execute under a shell, or nil for no shell"
+  :group 'unittest
+  :type 'string)
+
+
+;; use Python's unbuffered stdout option so that output is displayed
+;; immediately in the compilation-mode buffer
+(defcustom python-command
+  "python -u"
+  "Command to execute Python"
+  :group 'unittest
+  :type 'string)
 
 
 (defvar unittest-indent-str "    ")
@@ -59,11 +80,6 @@
                                          (unittest-get-defun-name outer-scope-defun)))))))))
 
 
-;; (defun unittest-print-enclosing-scope-name ()
-;;   (interactive)
-;;   (message (format "%s" (unittest-get-enclosing-scope-name))))
-
-
 (defun unittest-get-class-function-name ()
   (let ((def-line (unittest-match-defun-name)))
     (if def-line
@@ -76,12 +92,6 @@
                       enclosing-scope)
                   function-name))
             function-name)))))
-
-
-;; (defun unittest-print-defun-name ()
-;;   (interactive)
-;;   (message (format "%s" (unittest-get-class-function-name))))
-
 
 
 (define-compilation-mode unittest-mode "unittest"
@@ -98,14 +108,6 @@
              " -v"
            "")))
     (concat cmd verbose-flag)))
-
-
-(defvar shell-exec "bash -c")
-
-
-;; use Python's unbuffered stdout option so that output is displayed
-;; immediately in the compilation-mode buffer
-(defvar python-command "python -u")
 
 
 (defun run-in-shell (command &optional mode)
@@ -213,46 +215,27 @@ some-package (as determined by a setup.py file)"
         (unittest-execute-module-file module-file)))))
 
 
-(add-hook 'python-mode-hook
-          (lambda ()
-            (local-set-key
-             (kbd "C-x t r")
-             'unittest-execute-current-file)))
+(defvar unittest-mode-map
+  (let ((pmap (make-sparse-keymap))
+        (map (make-sparse-keymap)))
+    (define-key pmap "r" 'unittest-execute-current-file)
+    (define-key pmap "m" 'unittest-execute-current-module)
+    (define-key pmap "f" 'unittest-run-test-case)
+    (define-key pmap "s" 'unittest-run-single-test)
+    (define-key pmap "t" 'unittest-run-tests-in-directory)
+    (define-key pmap "d" 'unittest-run-tests-in-current-directory)
+    (define-key map (kbd "C-x t") pmap)
+    map)
+  "Keymap of `unittest-mode'.")
+
+;;;###autoload
+(define-minor-mode unittest-mode
+  "Minor mode allowing execution of Python unit tests"
+  :init-value nil
+  :keymap unittest-mode-map
+  :lighter nil
+  :group 'unittest
+  :require 'unittest)
 
 
-(add-hook 'python-mode-hook
-          (lambda ()
-            (local-set-key
-             (kbd "C-x t m")
-             'unittest-execute-current-module)))
-
-
-(add-hook 'python-mode-hook
-          (lambda ()
-            (local-set-key
-             (kbd "C-x t f")
-             'unittest-run-test-case)))
-
-
-(add-hook 'python-mode-hook
-          (lambda ()
-            (local-set-key
-             (kbd "C-x t s")
-             'unittest-run-single-test)))
-
-
-(add-hook 'python-mode-hook
-          (lambda ()
-            (local-set-key
-             (kbd "C-x t t")
-             'unittest-run-tests-in-directory)))
-
-
-(add-hook 'python-mode-hook
-          (lambda ()
-            (local-set-key
-             (kbd "C-x t d")
-             'unittest-run-tests-in-current-directory)))
-
-
-(provide 'sj-unittest-mode)
+(provide 'unittest)

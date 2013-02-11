@@ -39,9 +39,6 @@
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
 
-(require 'sj-unittest-mode)
-
-
 (require 'flycheck)
 
 

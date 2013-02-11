@@ -159,7 +159,7 @@ all tests for the module are run."
 
 (defun unittest-unittest-discover-cmd (verbose)
   "Returns the command used to execute unit tests"
-  (verbose-cmd (concat python-command " -m unittest discover" verbose)))
+  (verbose-cmd (concat python-command " -m unittest discover") verbose))
 
 
 (defun unittest-run-tests-in-directory (tests-dir)

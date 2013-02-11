@@ -11,7 +11,7 @@
 (setq -gnu-bin "C:\\Software\\gnuwin32\\bin")
 (setq -git-bin "C:\\Software\\Git\\bin")
 (setq -home-bin "C:\\Documents and Settings\\enthought-admin\\bin")
-(setq -gnutls-bin "C:\\Software\\gnutls-3.0.9\\bin")
+(setq -gnutls-bin "C:\\cygwin\\bin")
 
 (setenv
  "PATH"

@@ -96,6 +96,5 @@
 (require 'sj-jabber)
 (require 'sj-python)
 (require 'sj-cython)
-(require 'unittest)
 
 (setq-default display-buffer-reuse-frames t)

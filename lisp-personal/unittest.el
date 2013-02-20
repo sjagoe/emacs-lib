@@ -24,6 +24,13 @@
   :type 'string)
 
 
+(defcustom unittest-last-executed-module
+  nil
+  "Dotted module name of the last executed module"
+  :group 'unittest
+  :type 'string)
+
+
 (defvar unittest-indent-str "    ")
 
 
@@ -192,7 +199,16 @@ directory, turns it into a dotted package name and executes with
 
 e.g. foo/bar will be executed as 'python -m foo.bar'"
   (let ((package-module (replace-regexp-in-string "/" "." module-file)))
-    (run-in-shell (concat python-command " -m " package-module) 'python-exec-mode)))
+    (progn
+      (customize-save-variable 'unittest-last-executed-module package-module)
+      (run-in-shell (concat python-command " -m " package-module) 'python-exec-mode))))
+
+
+(defun unittest-execute-last-module ()
+  (interactive)
+  (if (not (string= unittest-last-executed-module nil))
+      (run-in-shell (concat python-command " -m " unittest-last-executed-module) 'python-exec-mode)
+    (error "No last module set")))
 
 
 (defun unittest-execute-current-module ()
@@ -220,6 +236,7 @@ some-package (as determined by a setup.py file)"
         (pmap (make-sparse-keymap)))
     (define-key pmap "r" 'unittest-execute-current-file)
     (define-key pmap "m" 'unittest-execute-current-module)
+    (define-key pmap "l" 'unittest-execute-last-module)
     (define-key pmap "f" 'unittest-run-test-case)
     (define-key pmap "s" 'unittest-run-single-test)
     (define-key pmap "t" 'unittest-run-tests-in-directory)

@@ -94,7 +94,7 @@
             function-name)))))
 
 
-(define-compilation-mode unittest-mode "unittest"
+(define-compilation-mode unittest-output-mode "unittest"
   "A compilation buffer for Python unittest")
 
 (define-compilation-mode python-exec-mode "python-exec"
@@ -111,7 +111,7 @@
 
 
 (defun run-in-shell (command &optional mode)
-  (let ((mode (if mode mode 'unittest-mode)))
+  (let ((mode (if mode mode 'unittest-output-mode)))
     (compilation-start
      (if shell-exec
          (concat shell-exec " \"" command "\"")
@@ -216,8 +216,8 @@ some-package (as determined by a setup.py file)"
 
 
 (defvar unittest-mode-map
-  (let ((pmap (make-sparse-keymap))
-        (map (make-sparse-keymap)))
+  (let ((map (make-sparse-keymap))
+        (pmap (make-sparse-keymap)))
     (define-key pmap "r" 'unittest-execute-current-file)
     (define-key pmap "m" 'unittest-execute-current-module)
     (define-key pmap "f" 'unittest-run-test-case)
@@ -228,9 +228,12 @@ some-package (as determined by a setup.py file)"
     map)
   "Keymap of `unittest-mode'.")
 
+
 ;;;###autoload
 (define-minor-mode unittest-mode
-  "Minor mode allowing execution of Python unit tests"
+  "Minor mode allowing execution of Python unit tests
+
+\\{unittest-mode-map}"
   :init-value nil
   :keymap unittest-mode-map
   :lighter nil

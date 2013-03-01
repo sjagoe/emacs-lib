@@ -18,7 +18,7 @@
  '(menu-bar-mode nil)
  '(rst-level-face-base-color "gray31")
  '(scroll-bar-mode nil)
- '(shell-exec "cmd /c")
+ '(unittest-shell-exec "cmd /c")
  '(show-paren-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil)

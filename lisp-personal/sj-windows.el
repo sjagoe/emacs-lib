@@ -13,7 +13,7 @@
 (setq -gnu-bin (concat -software-prefix "\\gnuwin32\\bin"))
 (setq -git-bin (concat -software-prefix "\\Git\\bin"))
 (setq -home-bin "C:\\Documents and Settings\\enthought-admin\\bin")
-(setq -gnutls-bin "C:\\cygwin\\bin")
+(setq -gnutls-bin (concat -software-prefix "\\cygwin\\bin"))
 (setq -console-bin (concat -software-prefix "\\Console2"))
 
 

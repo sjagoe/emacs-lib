@@ -7,23 +7,44 @@
 ;; (add-to-list 'default-frame-alist '(font . "-outline-Courier New-normal-r-normal-normal-11-82-96-96-c-*-iso8859-1"))
 ;; (add-to-list 'default-frame-alist '(font . "-*-Monaco-normal-r-*-*-17-102-120-120-c-*-iso8859-1"))
 
+(setq -software-prefix "C:\\Software")
+
 ;; Add GnuWin32 to the PATH
-(setq -gnu-bin "C:\\Software\\gnuwin32\\bin")
-(setq -git-bin "C:\\Software\\Git\\bin")
+(setq -gnu-bin (concat -software-prefix "\\gnuwin32\\bin"))
+(setq -git-bin (concat -software-prefix "\\Git\\bin"))
 (setq -home-bin "C:\\Documents and Settings\\enthought-admin\\bin")
 (setq -gnutls-bin "C:\\cygwin\\bin")
+(setq -console-bin (concat -software-prefix "\\Console2"))
+
 
 (setenv
  "PATH"
  (concat
   -gnu-bin ";"
   -git-bin ";"
+  (getenv "PATH") ";"
   -gnutls-bin ";"
   -home-bin ";"
-  (getenv "PATH")
+  -console-bin
   ))
 
-(setq exec-path (cons -gnu-bin (cons -git-bin (cons -gnutls-bin (cons -home-bin exec-path)))))
+
+(setq
+ exec-path
+ (cons
+  -gnu-bin
+  (cons
+   -git-bin
+   (append
+    exec-path
+    (cons
+     -gnutls-bin
+     (cons
+      -home-bin
+      (cons
+       -console-bin
+       nil)))))))
+
 
 (setq this-is-w32
       (or (eq window-system 'w32)

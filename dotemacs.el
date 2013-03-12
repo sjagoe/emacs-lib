@@ -98,3 +98,6 @@
 (require 'sj-cython)
 
 (setq-default display-buffer-reuse-frames t)
+
+(require 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)

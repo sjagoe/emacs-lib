@@ -7,10 +7,10 @@
 (require 'unittest)
 (require 'flycheck)
 
-(setq auto-mode-alist
-      (append '(("\\.pyx$" . python-mode)
-                ("\\.pxd$" . python-mode)
-                ("\\.pxi$" . python-mode)) auto-mode-alist))
+;; (setq auto-mode-alist
+;;       (append '(("\\.pyx$" . python-mode)
+;;                 ("\\.pxd$" . python-mode)
+;;                 ("\\.pxi$" . python-mode)) auto-mode-alist))
 
 (add-hook 'python-mode-hook 'whitespace-mode)
 (add-hook 'python-mode-hook 'flycheck-mode)

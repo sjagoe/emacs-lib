@@ -114,6 +114,10 @@
   "A compilation buffer for Python unittest")
 
 
+(define-compilation-mode python-exec-mode "python-exec"
+  "A compilation buffer for Python scripts")
+
+
 (defun verbose-cmd (cmd verbose)
   "Returns the command used to execute unit tests"
   (let ((verbose-flag
@@ -132,12 +136,31 @@
      mode)))
 
 
+
+
+;; (defun run-in-shell (command &optional name)
+;;   (let ((name (if name name "*python-exec*")))
+;;     (if (or (not (get-buffer name)) (kill-buffer name))
+;;         (let ((real-command
+;;                (if unittest-shell-exec
+;;                    (concat unittest-shell-exec " \"" command "\"")
+;;                  command)))
+;;           (progn
+;;             (compile real-command t)
+;;             (rename-buffer name))))))
+
+
+
+;; (defun run-in-shell (command)
+;;   (python-shell-make-comint
+;;    (if unittest-shell-exec
+;;        (concat unittest-shell-exec " \"" command "\"")
+;;      command)
+;;    "python-exec"))
+
+
 (defun run-in-shell (command)
-  (python-shell-make-comint
-   (if unittest-shell-exec
-       (concat unittest-shell-exec " \"" command "\"")
-     command)
-   "python-exec"))
+  (run-in-compile command 'python-exec-mode))
 
 
 (defun unittest-get-test-file-name ()

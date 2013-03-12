@@ -18,11 +18,12 @@
  '(menu-bar-mode nil)
  '(rst-level-face-base-color "gray31")
  '(scroll-bar-mode nil)
- '(unittest-shell-exec "cmd /c")
  '(show-paren-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(unittest-last-executed-module "black_adder")
+ '(unittest-shell-exec "cmd /c")
  '(whitespace-style (quote (face tabs spaces trailing lines-tail space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -30,6 +31,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:height 113 :family "DejaVu Sans Mono"))))
+ '(ace-jump-face-background ((t (:foreground "gray40" :family "dejavu sans mono"))))
  '(flycheck-error-face ((t (:background "gray50" :slant oblique))))
  '(flycheck-warning-face ((t (:background "gray35" :slant oblique))))
  '(jabber-chat-prompt-foreign ((t (:foreground "orange red" :weight bold))))

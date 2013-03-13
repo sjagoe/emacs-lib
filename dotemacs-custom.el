@@ -23,7 +23,7 @@
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(unittest-last-executed-module "black_adder")
- '(unittest-shell-exec "cmd /c")
+ '(unittest-shell-exec "cmd /S /C")
  '(whitespace-style (quote (face tabs spaces trailing lines-tail space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

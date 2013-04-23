@@ -23,6 +23,7 @@
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(unittest-python-command "/home/simon/epd/7.2-2-rh5-x86_64/bin/python -u")
+ '(whitespace-line-column 79)
  '(whitespace-style (quote (face tabs spaces trailing lines-tail space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

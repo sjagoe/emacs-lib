@@ -101,3 +101,5 @@
 
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+(define-coding-system-alias 'UTF-8 'utf-8)
